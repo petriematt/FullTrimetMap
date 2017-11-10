@@ -33,10 +33,42 @@ def checkInternet():
 		if pingstatus != 0:	
 			errorStatus()
 
+def loadStops():
+        stopNumbers = []
+        stopsFile = open("stopnumbers","r")
+        for line in stopsFile:
+            line = line[:-1]
+            stopNumbers.append(line)
+        return stopNumbers
+
+def queryTrimet(logidsString):
+        trimetReply = requests.get('https://developer.trimet.org/ws/v2/arrivals?appid=755E5C1798BEC31002A57468D&locids='+locidsString+'&arrivals=1&json=true')
+        trimetJSON = json.loads(trimetReply.text)
+        print trimetJSON
+
 apiCounter = 0
 logging.debug('Starting Program')
-checkInternet()
+#checkInternet()
+stopNumbers = loadStops()
+
+stopListPointer = 0
 while 1:
+    
+    stopsToUpdate = stopNumbers[stopListPointer:stopListPointer+10]
+    if len(stopNumbers) < stopListPointer:
+        stopListPointer = 0
+    else:
+        stopListPointer += 10
+        locidsString = ""
+        for stop in stopsToUpdate:
+            locidsString += stop +","
+        locidsString = locidsString[:-1]
+        queryTrimet(locidsString)
+        time.sleep(15)
+
+
+if 1 == 0:
+    while 1:
 
 
 	if apiCounter == 0:

@@ -3,6 +3,7 @@ import json
 import time
 import os
 import logging
+import sqlite3
 
 logging.basicConfig(filename='TriPi.log',level=logging.DEBUG)
 
@@ -46,10 +47,58 @@ def queryTrimet(logidsString):
         trimetJSON = json.loads(trimetReply.text)
         print trimetJSON
 
+def updateLEDTable(trimetJSON,ledTable,ledTableConnector):
+    curTime = time.time()
+    ledOnTime = curTime+120
+    ledBlinkTime = curTime+240
+    ledOffTime = curTime+300
+    
+
+    for train in trimetJSON['resultSet']['arrival']:
+        if train['status'] == 'estimated':
+            if(train['estimated']/1000 > ledOnTime:
+                    ledStatus='on'
+            elif(train['estimated']/1000 > ledBlinkTime):
+                    ledStatus='blink'
+            else:
+                    ledStatus='off'
+        else:
+            if(train['scheduled']/1000 > ledOnTime):
+                    ledStatus='on'
+            elif(train['scheduled']/1000 > ledBlinkTime):
+                    ledStatus='blink'
+            else:
+                    ledStatus='off'
+        line = train['route']
+        locid = train['locid']
+
+        if locid not in ledTable:
+            ledTable[locid]={line:ledResult}
+        else:
+            if line not in ledTable[locid]:
+                ledTable[locid]={line:ledResult}
+                
+def initializeDatabase():
+    ledTable = sqlite3.connect(':memory:')
+    return ledTable
+
+def connectToDatabase(ledTable):    
+    dbCursor = ledTable.cursor()
+    dbCursor.execute('''CREATE TABLE ledTable(stop TEXT, line TEXT, ledState TEXT, time TEXT)''')
+    ledTable.commit()
+
+def newRecord(ledTable, ledTableConnector, ledStatus, line, locid, curTime):
+    ledTableConnector.execute('''INSERT INTO ledTable(stop, line, ledState, time) VALUES(?,?,?,?)''', (locid, line, ledStatus, time))
+    ledTable.commit()
+
+
+
 apiCounter = 0
 logging.debug('Starting Program')
 #checkInternet()
 stopNumbers = loadStops()
+ledTable = initializeDatabase()
+ledTableConnector = connectToDatabase(ledTable)
 
 stopListPointer = 0
 while 1:

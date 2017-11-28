@@ -45,7 +45,8 @@ def loadStops():
 def queryTrimet(logidsString):
         trimetReply = requests.get('https://developer.trimet.org/ws/v2/arrivals?appid=755E5C1798BEC31002A57468D&locids='+locidsString+'&arrivals=1&json=true')
         trimetJSON = json.loads(trimetReply.text)
-        print trimetJSON
+        #print trimetJSON
+        return trimetJSON   
 
 def updateLEDTable(trimetJSON,ledTable,ledTableConnector):
     curTime = time.time()
@@ -56,7 +57,7 @@ def updateLEDTable(trimetJSON,ledTable,ledTableConnector):
 
     for train in trimetJSON['resultSet']['arrival']:
         if train['status'] == 'estimated':
-            if(train['estimated']/1000 > ledOnTime:
+            if(train['estimated']/1000 > ledOnTime):
                     ledStatus='on'
             elif(train['estimated']/1000 > ledBlinkTime):
                     ledStatus='blink'
@@ -72,11 +73,12 @@ def updateLEDTable(trimetJSON,ledTable,ledTableConnector):
         line = train['route']
         locid = train['locid']
 
-        if locid not in ledTable:
-            ledTable[locid]={line:ledResult}
-        else:
-            if line not in ledTable[locid]:
-                ledTable[locid]={line:ledResult}
+        #if locid not in ledTable:
+        #    ledTable[locid]={line:ledResult}
+        #else:
+        #    if line not in ledTable[locid]:
+        #        ledTable[locid]={line:ledResult}
+        print(line,locid)
                 
 def initializeDatabase():
     ledTable = sqlite3.connect(':memory:')
@@ -112,7 +114,7 @@ while 1:
         for stop in stopsToUpdate:
             locidsString += stop +","
         locidsString = locidsString[:-1]
-        queryTrimet(locidsString)
+        updateLEDTable(queryTrimet(locidsString),ledTable,ledTableConnector)
         time.sleep(15)
 
 

@@ -19,3 +19,41 @@ DEBUG:root:Starting Program
 DEBUG:root:Starting Program
 DEBUG:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): developer.trimet.org
 DEBUG:requests.packages.urllib3.connectionpool:https://developer.trimet.org:443 "GET /ws/v2/arrivals?appid=755E5C1798BEC31002A57468D&locids=8359,8631,13449,8362,8363,8364,8365,8366,8367,8368&arrivals=1&json=true HTTP/1.1" 200 None
+DEBUG:root:Starting Program
+INFO:urllib3.connectionpool:Starting new HTTPS connection (1): developer.trimet.org
+DEBUG:urllib3.connectionpool:"GET /ws/v2/arrivals?appid=755E5C1798BEC31002A57468D&locids=8359,8631,13449,8362,8363,8364,8365,8366,8367,8368&arrivals=1&json=true HTTP/1.1" 200 None
+DEBUG:root:Starting Program
+INFO:urllib3.connectionpool:Starting new HTTPS connection (1): developer.trimet.org
+DEBUG:urllib3.connectionpool:"GET /ws/v2/arrivals?appid=755E5C1798BEC31002A57468D&locids=8359,8631,13449,8362,8363,8364,8365,8366,8367,8368&arrivals=1&json=true HTTP/1.1" 200 None
+DEBUG:root:Starting Program
+INFO:urllib3.connectionpool:Starting new HTTPS connection (1): developer.trimet.org
+DEBUG:urllib3.connectionpool:"GET /ws/v2/arrivals?appid=755E5C1798BEC31002A57468D&locids=8359,8631,13449,8362,8363,8364,8365,8366,8367,8368&arrivals=1&json=true HTTP/1.1" 200 None
+DEBUG:root:Starting Program
+INFO:urllib3.connectionpool:Starting new HTTPS connection (1): developer.trimet.org
+DEBUG:urllib3.connectionpool:"GET /ws/v2/arrivals?appid=755E5C1798BEC31002A57468D&locids=8359,8631,13449,8362,8363,8364,8365,8366,8367,8368&arrivals=1&json=true HTTP/1.1" 200 None
+DEBUG:root:Starting Program
+INFO:urllib3.connectionpool:Starting new HTTPS connection (1): developer.trimet.org
+DEBUG:urllib3.connectionpool:"GET /ws/v2/arrivals?appid=755E5C1798BEC31002A57468D&locids=8359,8631,13449,8362,8363,8364,8365,8366,8367,8368&arrivals=1&json=true HTTP/1.1" 200 None
+DEBUG:root:Starting Program
+INFO:urllib3.connectionpool:Starting new HTTPS connection (1): developer.trimet.org
+DEBUG:urllib3.connectionpool:"GET /ws/v2/arrivals?appid=755E5C1798BEC31002A57468D&locids=8359,8631,13449,8362,8363,8364,8365,8366,8367,8368&arrivals=1&json=true HTTP/1.1" 200 None
+DEBUG:root:Starting Program
+INFO:urllib3.connectionpool:Starting new HTTPS connection (1): developer.trimet.org
+DEBUG:urllib3.connectionpool:"GET /ws/v2/arrivals?appid=755E5C1798BEC31002A57468D&locids=8359,8631,13449,8362,8363,8364,8365,8366,8367,8368&arrivals=1&json=true HTTP/1.1" 200 None
+DEBUG:root:Starting Program
+INFO:urllib3.connectionpool:Starting new HTTPS connection (1): developer.trimet.org
+DEBUG:urllib3.connectionpool:"GET /ws/v2/arrivals?appid=755E5C1798BEC31002A57468D&locids=8359,8631,13449,8362,8363,8364,8365,8366,8367,8368&arrivals=1&json=true HTTP/1.1" 200 None
+DEBUG:root:Starting Program
+INFO:urllib3.connectionpool:Starting new HTTPS connection (1): developer.trimet.org
+DEBUG:urllib3.connectionpool:"GET /ws/v2/arrivals?appid=755E5C1798BEC31002A57468D&locids=8359,8631,13449,8362,8363,8364,8365,8366,8367,8368&arrivals=1&json=true HTTP/1.1" 200 None
+DEBUG:root:Starting Program
+INFO:urllib3.connectionpool:Starting new HTTPS connection (1): developer.trimet.org
+DEBUG:urllib3.connectionpool:"GET /ws/v2/arrivals?appid=755E5C1798BEC31002A57468D&locids=8359,8631,13449,8362,8363,8364,8365,8366,8367,8368&arrivals=1&json=true HTTP/1.1" 200 None
+DEBUG:root:Starting Program
+INFO:urllib3.connectionpool:Starting new HTTPS connection (1): developer.trimet.org
+DEBUG:urllib3.connectionpool:"GET /ws/v2/arrivals?appid=755E5C1798BEC31002A57468D&locids=8359,8631,13449,8362,8363,8364,8365,8366,8367,8368&arrivals=1&json=true HTTP/1.1" 200 None
+DEBUG:root:Starting Program
+INFO:urllib3.connectionpool:Starting new HTTPS connection (1): developer.trimet.org
+DEBUG:urllib3.connectionpool:"GET /ws/v2/arrivals?appid=755E5C1798BEC31002A57468D&locids=8359,8631,13449,8362,8363,8364,8365,8366,8367,8368&arrivals=1&json=true HTTP/1.1" 200 None
+INFO:urllib3.connectionpool:Starting new HTTPS connection (1): developer.trimet.org
+DEBUG:urllib3.connectionpool:"GET /ws/v2/arrivals?appid=755E5C1798BEC31002A57468D&locids=8369,8370,8371,8372,8373,8374,8375,8376,8377&arrivals=1&json=true HTTP/1.1" 200 None

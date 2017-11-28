@@ -79,6 +79,7 @@ def updateLEDTable(trimetJSON,ledTable,ledTableConnector):
         #    if line not in ledTable[locid]:
         #        ledTable[locid]={line:ledResult}
         print(line,locid)
+        #test change
                 
 def initializeDatabase():
     ledTable = sqlite3.connect(':memory:')

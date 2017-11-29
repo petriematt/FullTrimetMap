@@ -48,7 +48,7 @@ def queryTrimet(logidsString):
         #print trimetJSON
         return trimetJSON   
 
-def updateLEDTable(trimetJSON,ledTable,ledTableConnector):
+def updateLEDTable(trimetJSON,ledTable,ledTableCursor):
     curTime = time.time()
     ledOnTime = curTime+120
     ledBlinkTime = curTime+240
@@ -78,7 +78,7 @@ def updateLEDTable(trimetJSON,ledTable,ledTableConnector):
         #else:
         #    if line not in ledTable[locid]:
         #        ledTable[locid]={line:ledResult}
-        print(line,locid)
+        newRecord(ledTable, ledTableCursor, ledStatus, line, locid, curTime)
         #test change
                 
 def initializeDatabase():
@@ -89,19 +89,33 @@ def connectToDatabase(ledTable):
     dbCursor = ledTable.cursor()
     dbCursor.execute('''CREATE TABLE ledTable(stop TEXT, line TEXT, ledState TEXT, time TEXT)''')
     ledTable.commit()
+    return dbCursor
 
-def newRecord(ledTable, ledTableConnector, ledStatus, line, locid, curTime):
-    ledTableConnector.execute('''INSERT INTO ledTable(stop, line, ledState, time) VALUES(?,?,?,?)''', (locid, line, ledStatus, time))
-    ledTable.commit()
+def newRecord(ledTable, ledTableCursor, ledStatus, line, locid, curTime):
+    ledTableCursor.execute("SELECT * FROM ledTable WHERE stop=? AND line=?", (locid, line))
+    row = ledTableCursor.fetchone()
+    if row is None:
+        ledTableCursor.execute("INSERT INTO ledTable (stop, line, ledState, time) VALUES(?,?,?,?)", (locid, line, ledStatus, curTime))
+        ledTable.commit()
+    else:
+        ledTableCursor.execute("DELETE FROM ledTable WHERE stop=? AND line=?", (locid, line))
+        ledTable.commit()
+        
+        ledTableCursor.execute("INSERT INTO ledTable (stop, line, ledState, time) VALUES(?,?,?,?)", (locid, line, ledStatus, curTime))
+        ledTable.commit()
 
-
+def displayLEDTable(ledTable,ledTableCursor):
+    ledTableCursor.execute("SELECT * FROM ledTable")
+    all_rows = ledTableCursor.fetchall()
+    print('Table:', all_rows)
+    print('Total Rows:', len(all_rows))
 
 apiCounter = 0
 logging.debug('Starting Program')
 #checkInternet()
 stopNumbers = loadStops()
 ledTable = initializeDatabase()
-ledTableConnector = connectToDatabase(ledTable)
+ledTableCursor = connectToDatabase(ledTable)
 
 stopListPointer = 0
 while 1:
@@ -115,7 +129,10 @@ while 1:
         for stop in stopsToUpdate:
             locidsString += stop +","
         locidsString = locidsString[:-1]
-        updateLEDTable(queryTrimet(locidsString),ledTable,ledTableConnector)
+        updateLEDTable(queryTrimet(locidsString),ledTable,ledTableCursor)
+        print("Start:")
+        displayLEDTable(ledTable,ledTableCursor)
+        print("End")
         time.sleep(15)
 
 
